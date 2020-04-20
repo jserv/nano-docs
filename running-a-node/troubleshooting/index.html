@@ -476,6 +476,26 @@
     What to do if the node crashes (Linux)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v21-nodes" title="v21+ nodes" class="md-nav__link">
+    v21+ nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v20-nodes" title="v20 nodes" class="md-nav__link">
+    v20 nodes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1020,6 +1040,26 @@
     What to do if the node crashes (Linux)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v21-nodes" title="v21+ nodes" class="md-nav__link">
+    v21+ nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v20-nodes" title="v20 nodes" class="md-nav__link">
+    v20 nodes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1196,22 +1236,38 @@
 </div>
 <p>If the node crashes, the most commonly seen message is "Segmentation fault (core dumped)". When using docker, this message will only show up in the docker logs. In any case, this is often not enough to go on in terms of figuring out what went wrong. The next steps detail what you should do to provide us with as much information as possible about the problem.</p>
 <p>When you are done gathering all information, please <a href="https://github.com/nanocurrency/nano-node/issues/new">create a new Github issue</a>, or <a href="https://chat.nano.org">reach us on Discord</a> in the <em>#support</em> channel, detailing your issue as much as possible.</p>
-<div class="admonition example">
-<p class="admonition-title">Step 1: Getting version information</p>
-<p>This command prints the node build information.</p>
-<p><strong>Not using docker:</strong>
-<div class="codehilite"><pre><span></span>./nano_node --version
+<div class="admonition note">
+<p class="admonition-title">Getting the latest node log</p>
+<p>The following command will order the log files such that the first one in the output is the most recent. If you restarted the node since the crash, then the relevant log file is not the latest one. Please be careful to give us the relevant log file.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Nano -&gt; NanoBeta if debugging a beta node</span>
+ls -dlt ~/Nano/log/* <span class="p">|</span> head
 </pre></div>
-<strong>Using docker:</strong>
-<div class="codehilite"><pre><span></span>docker <span class="nb">exec</span> <span class="si">${</span><span class="nv">NANO_NAME</span><span class="si">}</span> nano_node --version
-</pre></div></p>
-<p>Example output:
-<div class="codehilite"><pre><span></span>Version 20.0
-Build Info d5abc6ab &quot;GNU C++ version &quot; &quot;7.4.0&quot; &quot;BOOST 107000&quot; BUILT &quot;Aug  6 2019&quot;
-</pre></div></p>
+
+<p>Please provide the complete log file.</p>
+</div>
+<p>Please follow the steps below for the corresponding node version you are using. Should there be an error obtaining the information in a newer version, the older version steps should then be attempted.</p>
+<h4 id="v21-nodes"><em>v21</em>+ nodes<a class="headerlink" href="#v21-nodes" title="Permanent link">&para;</a></h4>
+<div class="admonition example">
+<p class="admonition-title">Step 1: Make sure addr2line is installed</p>
+<p>It is likely installed already, consult documentation for your linux distribution if it is not mentioned below:<br />
+<strong>Ubuntu</strong><br />
+<code>apt-get install addr2line</code>  </p>
+<p><strong>Fedora 22+</strong><br />
+<code>dnf install addr2line</code></p>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Step 2: Getting dmesg information</p>
+<p class="admonition-title">(Optional) Step 2: Save crash dump files</p>
+<p>The next step will clean up the dump files generated during the crash, if you wish to keep these then save <code>nano_node_backtrace.dump</code>, and all <code>nano_node_crash_load_address_dump_*.txt</code> files.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Step 3: Generate crash report</p>
+<p>Run:
+<code>./nano_node --debug_generate_crash_report</code></p>
+<p>This will generate a text file <code>nano_node_crash_report.txt</code> please send us the contents of this file.</p>
+</div>
+<h4 id="v20-nodes"><em>v20</em> nodes<a class="headerlink" href="#v20-nodes" title="Permanent link">&para;</a></h4>
+<div class="admonition example">
+<p class="admonition-title">Step 1: Getting dmesg information</p>
 <p>Depending on the error, it is possible you do not find any useful information in this step, in which case please move on to Step 3.
 Run the following command and look for <code>nano_node</code> at the end. If you see a relevant message, gather all messages with a similar timestamp - the number within brackets on the left.</p>
 <div class="codehilite"><pre><span></span>dmesg
@@ -1227,7 +1283,7 @@ Run the following command and look for <code>nano_node</code> at the end. If you
 <p>From this output, only the last 3 lines are relevant.</p>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Step 3: Getting syslog information</p>
+<p class="admonition-title">Step 2: Getting syslog information</p>
 <p>More information might be available in syslog. Run the following command and look for the time the crash ocurred.</p>
 <div class="codehilite"><pre><span></span>cat /var/log/syslog
 </pre></div>
@@ -1240,16 +1296,7 @@ Aug 15 11:56:07 ubuntu-server kernel: [6141.711999] Code: 24 70 48 83 c5 10 48 8
 <p>Include the relevant lines from the output. In this example, the log is similar to the one from Step 2.</p>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Step 4: Getting the latest node log</p>
-<p>The following command will order the log files such that the first one in the output is the most recent. If you restarted the node since the crash, then the relevant log file is not the latest one. Please be careful to give us the relevant log file.</p>
-<div class="codehilite"><pre><span></span><span class="c1"># Nano -&gt; NanoBeta if debugging a beta node</span>
-ls -dlt ~/Nano/log/* <span class="p">|</span> head
-</pre></div>
-
-<p>Please provide the complete log file.</p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Step 5: Getting a backtrace dump</p>
+<p class="admonition-title">Step 3: Getting a backtrace dump</p>
 <p>This command will produce some basic information about the error.</p>
 <p><strong>Not using docker</strong>:
 <div class="codehilite"><pre><span></span>./nano_node --debug_output_last_backtrace_dump &gt; nano_node_backtrace_output.txt
@@ -1262,7 +1309,7 @@ docker cp <span class="si">${</span><span class="nv">NANO_NAME</span><span class
 </pre></div></p>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Step 6: Producing the archive file</p>
+<p class="admonition-title">Step 4: Producing the archive file</p>
 <p>See the output of this command for the name of the file you should include in your report.
 <div class="codehilite"><pre><span></span><span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;nano_node_crash_</span><span class="k">$(</span>date +<span class="s2">&quot;%Y-%m-%d_%H-%M-%S.tar.gz&quot;</span><span class="k">)</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> tar czf <span class="nv">$FILE</span> --exclude<span class="o">=</span>*.tar.gz nano_node_* <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;Created archive </span><span class="nv">$FILE</span><span class="s2">&quot;</span>
 </pre></div></p>
