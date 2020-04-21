@@ -1378,6 +1378,8 @@
 <p>Instead of changing the config file, config values can be passed in via the <code>--config</code> option, which can be repeated multiple times.</p>
 <p>Example that enables the RPC and WebSocket servers:</p>
 <p><code>nano_node --config rpc.enable=true --config node.websocket.enable=true</code></p>
+<p>Strings are passed with escaped quotes (<code>\"</code>), such as:</p>
+<p><code>nano_node --config node.httpcallback.target=\"api/callback\"</code></p>
 <div class="admonition info">
 <p class="admonition-title">Mixing config options on the command line and TOML files</p>
 <p>If a config file exists, config values passed in via the command line will take precedence.</p>
