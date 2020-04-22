@@ -968,6 +968,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#node_telemetry" title="node_telemetry" class="md-nav__link">
+    node_telemetry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#peers" title="peers" class="md-nav__link">
     peers
   </a>
@@ -2083,6 +2090,13 @@
           <li class="md-nav__item">
   <a href="#node_id_delete" title="node_id_delete" class="md-nav__link">
     node_id_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node_telemetry" title="node_telemetry" class="md-nav__link">
+    node_telemetry
   </a>
   
 </li>
@@ -4112,6 +4126,133 @@ Number (128 bit, decimal), default 0. Return only accounts with balance above <s
   <span class="nt">&quot;deprecated&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
 <span class="p">}</span>
 </pre></div></p>
+<hr />
+<h3 id="node_telemetry">node_telemetry<a class="headerlink" href="#node_telemetry" title="Permanent link">&para;</a></h3>
+<p><em>version 21.0+</em><br />
+Return metrics from nodes. See <a href="/protocol-design/networking#node-telemetry">networking node telemetry</a> for more information.  <br />
+<strong>Request:</strong>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;node_telemetry&quot;</span>
+<span class="p">}</span>
+</pre></div>
+<strong>Response:</strong>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;block_count&quot;</span><span class="p">:</span> <span class="s2">&quot;5777903&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;cemented_count&quot;</span><span class="p">:</span> <span class="s2">&quot;688819&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;unchecked_count&quot;</span><span class="p">:</span> <span class="s2">&quot;443468&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;account_count&quot;</span><span class="p">:</span> <span class="s2">&quot;620750&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;bandwidth_cap&quot;</span><span class="p">:</span> <span class="s2">&quot;1572864&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;peer_count&quot;</span><span class="p">:</span> <span class="s2">&quot;32&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;protocol_version&quot;</span><span class="p">:</span> <span class="s2">&quot;18&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;uptime&quot;</span><span class="p">:</span> <span class="s2">&quot;556896&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;genesis_block&quot;</span><span class="p">:</span> <span class="s2">&quot;F824C697633FAB78B703D75189B7A7E18DA438A2ED5FFE7495F02F681CD56D41&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;major_version&quot;</span><span class="p">:</span> <span class="s2">&quot;21&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;patch_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pre_release_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;maker&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1587055945990&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;active_difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffcdbf40aa45&quot;</span>
+<span class="p">}</span>
+</pre></div></p>
+<p>This contains a summarized view of the network with 10% of lower/upper bound results removed to reduce the effect of outliers. Returned values are calculated as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Response details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>block_count</strong></td>
+<td>average count of blocks in ledger (including unconfirmed)</td>
+</tr>
+<tr>
+<td><strong>cemented_count</strong></td>
+<td>average count of blocks cemented in ledger (only confirmed)</td>
+</tr>
+<tr>
+<td><strong>unchecked_count</strong></td>
+<td>average count of unchecked blocks</td>
+</tr>
+<tr>
+<td><strong>account_count</strong></td>
+<td>average count of accounts in ledger</td>
+</tr>
+<tr>
+<td><strong>bandwidth_cap</strong></td>
+<td><code>0</code> = unlimited; the mode is chosen if there is more than 1 common result otherwise the results are averaged (excluding <code>0</code>)</td>
+</tr>
+<tr>
+<td><strong>peer_count</strong></td>
+<td>average count of peers nodes are connected to</td>
+</tr>
+<tr>
+<td><strong>*_version</strong></td>
+<td>mode (most common) of (protocol, major, minor, patch, pre_release) versions</td>
+</tr>
+<tr>
+<td><strong>uptime</strong></td>
+<td>number of seconds since the UTC epoch at the point where the response is sent from the peer</td>
+</tr>
+<tr>
+<td><strong>genesis_block</strong></td>
+<td>mode (most common) of genesis block hashes</td>
+</tr>
+<tr>
+<td><strong>maker</strong></td>
+<td>meant for third party node software implementing the protocol so that it can be distinguished, <code>0</code> = Nano Foundation</td>
+</tr>
+<tr>
+<td><strong>timestamp</strong></td>
+<td>number of milliseconds since the UTC epoch at the point where the response is sent from the peer</td>
+</tr>
+<tr>
+<td><strong>active_difficulty</strong></td>
+<td>the current network difficulty, see <a href="/commands/rpc-protocol/#active_difficulty">active_difficulty</a> "network_current"</td>
+</tr>
+</tbody>
+</table>
+<p>This only returns values which have been cached by the ongoing polling of peer metric data. Each response is cached for 60 seconds on the main network and 15 seconds on beta; a few additional seconds are added on for response delays.</p>
+<p><strong>Optional "raw"</strong><br />
+When setting raw to true metrics from all nodes are displayed. It additionally contains <strong>signature</strong>, <strong>node_id</strong>, <strong>address</strong> and <strong>port</strong> from each peer.</p>
+<p><strong>Request:</strong>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;node_telemetry&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;raw&quot;</span> <span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+<span class="p">}</span>
+</pre></div></p>
+<p><strong>Response:</strong>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;5F8DEE5F895D53E122FDEB4B1B4118A41F9DDB818C6B299B09DF59131AF9F201BB7057769423F6B0C868B57509177B54D5D2C731405FE607527F5E2B6B2E290F&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;node_id&quot;</span><span class="p">:</span> <span class="s2">&quot;DF00C99E4205D74B0B20E2F9399DCF847C6A8FDFD9F47BAB2F95EE8C056B670C&quot;</span>
+      <span class="err">...</span>
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;::ffff:152.89.106.89&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;54000&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;D691B855D9EC70EA6320DE609EB379EB706845433E034AD22721E8F91BF3A26156F40CCB2E98653F1E63D4CE5F10F530A835DE1B154D1213464E3B9BB9BE4908&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;node_id&quot;</span><span class="p">:</span> <span class="s2">&quot;C8172AB14437B245760B418621AD0FF22003F4ED55C1736C41FAFEAFC30FF70B&quot;</span>
+      <span class="err">...</span>    
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;::ffff:95.216.205.215&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;54006&quot;</span>
+    <span class="p">}</span>
+    <span class="err">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div></p>
+<p><strong>Optional "address" &amp; "port"</strong><br />
+Get metrics from a specific peer. It accepts both ipv4 and ipv6 addresses
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;node_telemetry&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;246.125.123.456&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;7075&quot;</span>
+<span class="p">}</span>
+</pre></div>
+Metrics for the local node can be requested using the peering port and any loopback address <strong>127.0.0.1</strong>, <strong>::1</strong> or <strong>[::1]</strong></p>
 <hr />
 <h3 id="peers">peers<a class="headerlink" href="#peers" title="Permanent link">&para;</a></h3>
 <p>Returns a list of pairs of online peer IPv6:port and its node protocol network version    </p>

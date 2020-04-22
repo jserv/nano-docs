@@ -737,6 +737,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#node-telemetry" title="Node telemetry" class="md-nav__link">
+    Node telemetry
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signing" title="Signing" class="md-nav__link">
+    Signing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -914,6 +934,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#node-telemetry" title="Node telemetry" class="md-nav__link">
+    Node telemetry
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signing" title="Signing" class="md-nav__link">
+    Signing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -975,6 +1015,21 @@
 </table>
 <h2 id="ipv4ipv6-addressing">IPV4/IPV6 addressing<a class="headerlink" href="#ipv4ipv6-addressing" title="Permanent link">&para;</a></h2>
 <p>The system is built to only operate on IPv6 and uses IPv4-mapped IPv6 addresses to connect to IPv4 hosts.</p>
+<h2 id="node-telemetry">Node telemetry<a class="headerlink" href="#node-telemetry" title="Permanent link">&para;</a></h2>
+<p>In <em>v21</em> node telemetry was added to node. This allows peers to communicate telemetry metrics to each other. For specific details on the message format see <code>telemetry_ack</code> in the <a href="https://github.com/nanocurrency/protocol/tree/master/reference">protocol specification</a>.</p>
+<p>The nodes are designed to reply to <code>telemetry_req</code> messages. They avoid replying if messages are received from the same peer in quick succession; the minimum time until another reply is 60 seconds on the main network, 15 seconds on beta. This is done to reduce bandwidth.</p>
+<p>Telemetry messsages bypass the node's bandwidth limiter so that services monitoring the network can still do so during when the network is heavily used. Sending <code>telemetry_req</code> frequently within this exclusion zone could see your ip blacklisted by other peers. The node safely handles this for you by doing ongoing requests periodically and only sent when valid to do so.</p>
+<h3 id="signing">Signing<a class="headerlink" href="#signing" title="Permanent link">&para;</a></h3>
+<p><code>Telemetry_ack</code> messages are signed using <a href="/protocol-design/signing-hashing-and-key-derivation/#signing-algorithm-ed25519">ED25519</a> as follows:</p>
+<div class="codehilite"><pre><span></span>ED25519(key = node id public key, message = &quot;node id || block count || cemented count|| unchecked count || account count || bandwidth capacity || peer count || protocol version || uptime || genesis block hash || major version || minor version || patch version || pre-release version || maker || timestamp since UTC epoch || active difficulty&quot;)
+</pre></div>
+
+<p>The node id used in the initial handshake is used for signing. The genesis block hash should be in big endian.
+The data is signed so that it cannot be forged by a Man In The Middle (MITM) attack.</p>
+<div class="admonition warning">
+<p class="admonition-title">Peer disconnections</p>
+<p>Sending incorrectly signed telemetry data to peers will result in being blacklisted as it is seen as malicious, make sure the signing is correct! Verify signatures against known signing done by node by testing <a href="/commands/rpc-protocol#node_telemetry">local telemetry</a>. Nodes with a different genesis block hash will also be disconnected.</p>
+</div>
                 
                   
                 
