@@ -3224,6 +3224,10 @@ Default "false". If "true", "block" in the response will contain a JSON subtree 
 <p><strong>Optional "version"</strong></p>
 <p><em>version 21.0+</em>
 Work version string. Currently "work_1" is the default and only valid option. Only used if optional <strong>work</strong> is not given.</p>
+<p><strong>Optional "difficulty"</strong>
+<em>version 21.0+</em>
+Difficulty value (16 hexadecimal digits string, 64 bit). Uses <strong>difficulty</strong> value to generate work. Only used if optional <strong>work</strong> is not given.<br />
+If difficulty and work values are both not given, RPC processor tries to calculate difficulty for work generation based on ledger data: epoch from previous block or from link for receive subtype; block subtype from previous block balance.  </p>
 <hr />
 <h3 id="block_hash">block_hash<a class="headerlink" href="#block_hash" title="Permanent link">&para;</a></h3>
 <p><em>version 13.0+</em> <br />
