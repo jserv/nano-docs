@@ -5000,7 +5000,7 @@ Stop generating <strong>work</strong> for block  </p>
 <hr />
 <h3 id="work_generate">work_generate<a class="headerlink" href="#work_generate" title="Permanent link">&para;</a></h3>
 <p><em>enable_control required</em><br />
-Generates <strong>work</strong> for block. <strong>hash</strong> is the frontier of the account or in the case of an open block, the public key representation of the account which can be found with <a href="#account_key">account_key</a>  </p>
+Generates <strong>work</strong> for block. <strong>hash</strong> is the frontier of the account or in the case of an open block, the public key representation of the account which can be found with <a href="#account_key">account_key</a>.  </p>
 <div class="admonition danger">
 <p class="admonition-title">Dangerous RPC calls controlled by <code>enable_control</code></p>
 <p>This RPC command/option requires <code>enable_control</code> to be enabled within the RPC config file. Enabling this means that anyone with access to the RPC port could potentially <a href="/commands/rpc-protocol#send">access wallet funds</a>, <a href="/commands/rpc-protocol#stop">stop</a> the node from running and take other dangerous actions. <strong>Use caution when enabling this option, especially with external RPC access available.</strong> For more details see the <a href="/running-a-node/security">Node Security page</a>.</p>
@@ -5008,15 +5008,14 @@ Generates <strong>work</strong> for block. <strong>hash</strong> is the frontier
 <p><strong>Request:</strong>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;work_generate&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffd21c3933f3&quot;</span>
+  <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span>
 <span class="p">}</span>
 </pre></div>
 <strong>Response:</strong>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;work&quot;</span><span class="p">:</span> <span class="s2">&quot;2bf29ef00786a6bc&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffd21c3933f4&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;1.394647&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;work&quot;</span><span class="p">:</span> <span class="s2">&quot;2b3d689bbcb21dca&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;fffffff93c41ec94&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">of</span> <span class="err">the</span> <span class="err">resulting</span> <span class="err">work</span>
+  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;1.182623871097636&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v19.0,</span> <span class="err">calculated</span> <span class="err">from</span> <span class="err">default</span> <span class="err">base</span> <span class="err">difficulty</span>
   <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v</span><span class="mf">20.0</span>
 <span class="p">}</span>
 </pre></div></p>
@@ -5026,7 +5025,7 @@ Boolean, false by default. If the optional <code>use_peers</code> parameter is s
 Without this parameter, the node will only generate work locally.</p>
 <p><strong>Optional "difficulty"</strong></p>
 <p><em>version 19.0+</em><br />
-Difficulty value (16 hexadecimal digits string, 64 bit). Uses <strong>difficulty</strong> value to generate work.  </p>
+Difficulty value (16 hexadecimal digits string, 64 bit). Uses <strong>difficulty</strong> value to generate work. Defaults to the network base difficulty.</p>
 <p><strong>Optional "multiplier"</strong></p>
 <p><em>version 20.0+</em><br />
 Multiplier from base difficulty (positive number). Uses equivalent difficulty as <strong>multiplier</strong> from base difficulty to generate work.<br />
@@ -5096,26 +5095,60 @@ Clear work peers node list until restart   </p>
 </pre></div></p>
 <hr />
 <h3 id="work_validate">work_validate<a class="headerlink" href="#work_validate" title="Permanent link">&para;</a></h3>
-<p>Check whether <strong>work</strong> is valid for block  </p>
+<p>Check whether <strong>work</strong> is valid for block. Provides two values: <strong>valid_all</strong> is <code>true</code> if the work is valid at the current network difficulty (work can be used for any block). <strong>valid_receive</strong> is <code>true</code> if the work is valid for use in a receive block.</p>
+<p><strong>Read the details below when using this RPC in V21</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Semantics change in V21.0</p>
+<p>In V21.0, when the optional <strong>difficulty</strong> is <em>not</em> given, <strong>valid</strong> is no longer included in the response.</p>
+<p>Use the new response fields <strong>"valid_all"</strong> and <strong>"valid_receive"</strong> taking into account the subtype of the block using this work value:</p>
+<ul>
+<li><strong>valid_all</strong> validates at the current network difficulty. As soon as the node processes the first <a href="/releases/network-upgrades#increased-work-difficulty">epoch_2 block</a>, this difficulty is increased.</li>
+<li><strong>valid_receive</strong> is completely accurate <strong>only once the <a href="/releases/network-upgrades#increased-work-difficulty">epoch_2 upgrade</a> is finished.</strong> Until the upgrade is finished, it is only accurate if the account where this work will be used is already upgraded. The upgrade status of an account can be obtained from <a href="#account_info">account_info</a>. The account is upgraded if "account_version" is <code>"2"</code>.</li>
+</ul>
+</div>
 <p><strong>Request:</strong>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;work_validate&quot;</span><span class="p">,</span>
   <span class="nt">&quot;work&quot;</span><span class="p">:</span> <span class="s2">&quot;2bf29ef00786a6bc&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffd21c3933f3&quot;</span>
+  <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span>
 <span class="p">}</span>
 </pre></div>
-<strong>Response:</strong>
+<strong>Response since v21.0:</strong>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;valid&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffd21c3933f4&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;1.394647&quot;</span>
+  <span class="nt">&quot;valid_all&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;valid_receive&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;fffffff93c41ec94&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;1.182623871097636&quot;</span> <span class="err">//</span> <span class="err">calculated</span> <span class="err">from</span> <span class="err">the</span> <span class="err">default</span> <span class="err">base</span> <span class="err">difficulty</span>
 <span class="p">}</span>
 </pre></div></p>
-<p><em>Since version 19.0+:</em> The response also includes the work <code>value</code> in hexadecimal format, and a <code>multiplier</code> from the base difficulty (not from the optionally given difficulty).</p>
+<details class="abstract"><summary>Response up to v20.0</summary><div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;valid&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;fffffff93c41ec94&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v19.0</span>
+  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;9.4609&quot;</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v</span><span class="mf">19.0</span>
+<span class="p">}</span>
+</pre></div>
+
+</details>
 <p><strong>Optional "difficulty"</strong></p>
 <p><em>version 19.0+</em><br />
-Difficulty value (16 hexadecimal digits string, 64 bit). Uses <strong>difficulty</strong> value to validate work  </p>
+Difficulty value (16 hexadecimal digits string, 64 bit). Uses <strong>difficulty</strong> value to validate work. Defaults to the network base difficulty. Response includes extra field <strong>valid</strong> signifying validity at the given difficulty.  </p>
+<p><strong>Request with given "difficulty"</strong><br />
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;work_validate&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;ffffffffffffffff&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;work&quot;</span><span class="p">:</span> <span class="s2">&quot;2bf29ef00786a6bc&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+<strong>Response with given "difficulty:</strong>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;valid&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;valid_all&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v21.0</span>
+  <span class="nt">&quot;valid_receive&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">since</span> <span class="err">v21.0</span>
+  <span class="nt">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;fffffff93c41ec94&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;multiplier&quot;</span><span class="p">:</span> <span class="s2">&quot;1.182623871097636&quot;</span>
+<span class="p">}</span>
+</pre></div></p>
 <p><strong>Optional "multiplier"</strong></p>
 <p><em>version 20.0+</em><br />
 Multiplier from base difficulty (positive number). Uses equivalent difficulty as <strong>multiplier</strong> from base difficulty to validate work.<br />

@@ -1958,7 +1958,8 @@ Path: /home/USER/NanoTest
 <p>Profile simulated bootstrap process</p>
 <h3 id="-debug_profile_generate">--debug_profile_generate<a class="headerlink" href="#-debug_profile_generate" title="Permanent link">&para;</a></h3>
 <p>Profile work generation<br />
-Optional <code>--pow_sleep_interval</code> in version 19.0+ which sets an amount to sleep (in nanoseconds) between batches of POW calculations when using the CPU.</p>
+Optional <code>--pow_sleep_interval</code> in version 19.0+ which sets an amount to sleep (in nanoseconds) between batches of POW calculations when using the CPU.<br />
+Optionals <code>--difficulty</code> and <code>--multiplier</code> (only the latter is used if both given) in version 21.0+ to set the work generation threshold.</p>
 <h3 id="-debug_profile_validate">--debug_profile_validate<a class="headerlink" href="#-debug_profile_validate" title="Permanent link">&para;</a></h3>
 <p>Profile work validation</p>
 <h3 id="-debug_profile_kdf">--debug_profile_kdf<a class="headerlink" href="#-debug_profile_kdf" title="Permanent link">&para;</a></h3>
@@ -1978,7 +1979,8 @@ Validate blocks in the ledger, includes checks for confirmation height</p>
 <h3 id="-debug_xorshift_profile">--debug_xorshift_profile<a class="headerlink" href="#-debug_xorshift_profile" title="Permanent link">&para;</a></h3>
 <p>[Disabled] Profile xorshift algorithms</p>
 <h3 id="-debug_opencl-platformplatform-devicedevice-threadsthreads">--debug_opencl --platform=<code>&lt;platform&gt;</code> --device=<code>&lt;device&gt;</code> --threads=<code>&lt;threads&gt;</code><a class="headerlink" href="#-debug_opencl-platformplatform-devicedevice-threadsthreads" title="Permanent link">&para;</a></h3>
-<p><em>[Draft]</em> Profile OpenCL work generation for <code>&lt;device&gt;</code> on <code>&lt;platform&gt;</code> using <code>&lt;threads&gt;</code> count. To retrieve available platforms &amp; devices run --diagnostics</p>
+<p><em>[Draft]</em> Profile OpenCL work generation for <code>&lt;device&gt;</code> on <code>&lt;platform&gt;</code> using <code>&lt;threads&gt;</code> count. To retrieve available platforms &amp; devices run --diagnostics.<br />
+Optionals <code>--difficulty</code> and <code>--multiplier</code> (only the latter is used if both given) in version 21.0+ to set the work generation threshold.</p>
 <h3 id="-diagnostics">--diagnostics<a class="headerlink" href="#-diagnostics" title="Permanent link">&para;</a></h3>
 <p>Run internal diagnostics and validate existing config file (or create default config file if it doesn't exist)</p>
 <h3 id="-generate_config-noderpc">--generate_config node|rpc<a class="headerlink" href="#-generate_config-noderpc" title="Permanent link">&para;</a></h3>
