@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://docs.nano.org/running-a-node/beyond-the-node/">
+        <link rel="canonical" href="https://docs.nano.org/running-a-node/ledger-management/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Beyond the Node - Documentation</title>
+        <title>Ledger Management - Documentation</title>
       
     
     
@@ -97,7 +97,7 @@
   <!-- Open Graph data -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="" />
-  <meta property="og:url" content="https://docs.nano.org/running-a-node/beyond-the-node/" />
+  <meta property="og:url" content="https://docs.nano.org/running-a-node/ledger-management/" />
   <meta property="og:image" content="https://docs.nano.org/images/nano-docs-open-graph.png" />
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="Nano Docs" />
@@ -138,7 +138,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#beyond-the-node" tabindex="1" class="md-skip">
+      <a href="#ledger-management" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -163,7 +163,7 @@
               Documentation
             </span>
             <span class="md-header-nav__topic">
-              Beyond the Node
+              Ledger Management
             </span>
           
         </div>
@@ -423,18 +423,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../ledger-management/" title="Ledger Management" class="md-nav__link">
-      Ledger Management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -446,11 +434,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Beyond the Node
+        Ledger Management
       </label>
     
-    <a href="./" title="Beyond the Node" class="md-nav__link md-nav__link--active">
-      Beyond the Node
+    <a href="./" title="Ledger Management" class="md-nav__link md-nav__link--active">
+      Ledger Management
     </a>
     
       
@@ -464,23 +452,104 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-tools-and-services" title="Building tools and services" class="md-nav__link">
-    Building tools and services
+  <a href="#ledger-file" title="Ledger file" class="md-nav__link">
+    Ledger file
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#need-some-inspiration" title="Need some inspiration?" class="md-nav__link">
-    Need some inspiration?
+  <a href="#bootstrapping" title="Bootstrapping" class="md-nav__link">
+    Bootstrapping
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tuning-options" title="Tuning options" class="md-nav__link">
+    Tuning options
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloaded-ledger-files" title="Downloaded ledger files" class="md-nav__link">
+    Downloaded ledger files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-source" title="Data source" class="md-nav__link">
+    Data source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-blocks-and-voting-weights" title="Validating blocks and voting weights" class="md-nav__link">
+    Validating blocks and voting weights
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirmation-data" title="Confirmation data" class="md-nav__link">
+    Confirmation data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-node" title="Updating the node" class="md-nav__link">
+    Updating the node
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#keep-learning" title="Keep learning" class="md-nav__link">
-    Keep learning
+  <a href="#rocksdb-ledger-backend" title="RocksDB Ledger Backend" class="md-nav__link">
+    RocksDB Ledger Backend
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-node-with-rocksdb-support" title="Build node with RocksDB support" class="md-nav__link">
+    Build node with RocksDB support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-rocksdb" title="Enable RocksDB" class="md-nav__link">
+    Enable RocksDB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -492,6 +561,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../beyond-the-node/" title="Beyond the Node" class="md-nav__link">
+      Beyond the Node
+    </a>
   </li>
 
         
@@ -869,23 +950,104 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-tools-and-services" title="Building tools and services" class="md-nav__link">
-    Building tools and services
+  <a href="#ledger-file" title="Ledger file" class="md-nav__link">
+    Ledger file
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#need-some-inspiration" title="Need some inspiration?" class="md-nav__link">
-    Need some inspiration?
+  <a href="#bootstrapping" title="Bootstrapping" class="md-nav__link">
+    Bootstrapping
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tuning-options" title="Tuning options" class="md-nav__link">
+    Tuning options
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloaded-ledger-files" title="Downloaded ledger files" class="md-nav__link">
+    Downloaded ledger files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-source" title="Data source" class="md-nav__link">
+    Data source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-blocks-and-voting-weights" title="Validating blocks and voting weights" class="md-nav__link">
+    Validating blocks and voting weights
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirmation-data" title="Confirmation data" class="md-nav__link">
+    Confirmation data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-node" title="Updating the node" class="md-nav__link">
+    Updating the node
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#keep-learning" title="Keep learning" class="md-nav__link">
-    Keep learning
+  <a href="#rocksdb-ledger-backend" title="RocksDB Ledger Backend" class="md-nav__link">
+    RocksDB Ledger Backend
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-node-with-rocksdb-support" title="Build node with RocksDB support" class="md-nav__link">
+    Build node with RocksDB support
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-rocksdb" title="Enable RocksDB" class="md-nav__link">
+    Enable RocksDB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -905,17 +1067,215 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/nanocurrency/nano-docs/edit/master/docs/running-a-node/beyond-the-node.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/nanocurrency/nano-docs/edit/master/docs/running-a-node/ledger-management.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="beyond-the-node">Beyond the Node<a class="headerlink" href="#beyond-the-node" title="Permanent link">&para;</a></h1>
-<h2 id="building-tools-and-services">Building tools and services<a class="headerlink" href="#building-tools-and-services" title="Permanent link">&para;</a></h2>
-<p>Congrats! Now that you understand more about how Nano works and setup your own node to participate on the network, the next step is building tools and services on the node. Our <a href="/integration-guides/the-basics/">Integration Guides</a> are a great starting point to help you understand how you can leverage your node to create amazing applications that utilize the unique value transfer features of Nano.</p>
-<h2 id="need-some-inspiration">Need some inspiration?<a class="headerlink" href="#need-some-inspiration" title="Permanent link">&para;</a></h2>
-<p>A big part of the Nano community is <a href="https://nanocenter.org/">the Nano Center</a>. Run by a group of Nano enthusiasts, their website helps manage requests for assistance and funding for Nano-related projects. Check out the in progress and past funded projects for some great ideas and opportunities to join in building on top of Nano!</p>
-<p>For even more details about the many projects that help make our ecosystem robust, head over to <a href="https://nano.org">Nano.org</a> for examples of wallets, services and more that have integrated Nano.</p>
-<h2 id="keep-learning">Keep learning<a class="headerlink" href="#keep-learning" title="Permanent link">&para;</a></h2>
-<p>If you're ready to keep building with Nano, head over to <a href="/integration-guides/the-basics/">The Basics</a> of our Integration Guides.</p>
+                <h1 id="ledger-management">Ledger Management<a class="headerlink" href="#ledger-management" title="Permanent link">&para;</a></h1>
+<h2 id="ledger-file">Ledger file<a class="headerlink" href="#ledger-file" title="Permanent link">&para;</a></h2>
+<p>The node automatically manages the full Nano ledger in the <code>data.ldb</code> file which can be found in the data folder at these locations:</p>
+<table>
+<thead>
+<tr>
+<th><strong>OS</strong></th>
+<th><strong>Location</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code class="codehilite">C:<span class="se">\U</span>sers<span class="se">\&lt;</span>user&gt;<span class="se">\A</span>ppData<span class="se">\L</span>ocal<span class="se">\N</span>ano<span class="se">\</span></code></td>
+</tr>
+<tr>
+<td>OSX</td>
+<td><code class="codehilite">/Users/&lt;user&gt;/Library/Nano/</code></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code class="codehilite">/home/&lt;user&gt;/Nano/</code></td>
+</tr>
+</tbody>
+</table>
+<p>This file will grow in size as the ledger does. As of April 2020 there are over 49 million blocks in the ledger which requires at least 26GB of free space. See <a href="/running-a-node/node-setup/#hardware-recommendations">hardware recommendations</a> for more preferred node specs.</p>
+<div class="admonition warning">
+<p class="admonition-title">RocksDB uses many files</p>
+<p>The above details are for the default LMDB database setup. If using RocksDB, please note that it uses potentially 100s of SST files to manage the ledger so details should be followed from the <a href="#rocksdb-ledger-backend">RocksDB Ledger Backend</a> section below.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Updating the node may require a lengthy ledger upgrade</p>
+<p>Read the <a href="#updating-the-node">guide</a> further down this page for some tips on how to minimize downtime during an update.</p>
+</div>
+<hr />
+<h2 id="bootstrapping">Bootstrapping<a class="headerlink" href="#bootstrapping" title="Permanent link">&para;</a></h2>
+<p>When starting a new node the ledger must be downloaded and kept updated in order to participate on the network properly. This is done automatically via bootstrapping - the node downloads and verifies blocks from other nodes across the network. This process can take hours to days to complete depending on network conditions and <a href="/running-a-node/node-setup/#hardware-recommendations">hardware specifications</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Restarting node during bootstrapping not recommended</p>
+<p>It is <strong>highly recommended to avoid restarting the node during bootstrapping</strong> as this can cause extra delays in the syncing process. An exception can be made when it is very clear from calls to the <a href="/commands/rpc-protocol/#block_count"><code>block_count</code></a> RPC that block counts are stuck for multiple hours.</p>
+</div>
+<h3 id="tuning-options">Tuning options<a class="headerlink" href="#tuning-options" title="Permanent link">&para;</a></h3>
+<p>Depending on machine and networking resources, the bootstrap performance can be improved by updating the following <a href="/running-a-node/configuration/">configuration</a> values:</p>
+<ul>
+<li><code>node.bootstrap_connections_max</code>: up to max of <code>128</code></li>
+<li><code>node.bootstrap_connections</code>: up to max of <code>16</code></li>
+</ul>
+<p>The additional resource usage these options cause should be considered, especially if left during normal operation (after initial bootstrap is complete).</p>
+<hr />
+<h2 id="downloaded-ledger-files">Downloaded ledger files<a class="headerlink" href="#downloaded-ledger-files" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Always backup your ledgers file</p>
+<p>Whenever you are attempting to change the ledger, it is highly recommended you create backups of the existing <code>data.ldb</code> file to ensure you have a rollback point if issues are encountered.</p>
+</div>
+<p>To avoid bootstrapping times, a <a href="#ledger-file">ledger file</a> (<code>data.ldb</code>) can be downloaded off-network and added to the data file used by the node. This process is sometimes referred to as a "fast sync". The Nano Foundation provides a daily ledger file download in the #ledger channel of our <a href="https://chat.nano.org">Discord server</a>. This is posted by <code>SergSW</code> and contains checksums for validation.</p>
+<p>Before using this method there are a few considerations to ensure it is done safely:</p>
+<h3 id="data-source">Data source<a class="headerlink" href="#data-source" title="Permanent link">&para;</a></h3>
+<p>Make sure you trust the source providing the data to you. If you are unfamiliar with the individual or organization providing the ledger, consider other options for the data or fallback to the default of <a href="#bootstrapping">bootstrapping</a> from the network.</p>
+<h3 id="validating-blocks-and-voting-weights">Validating blocks and voting weights<a class="headerlink" href="#validating-blocks-and-voting-weights" title="Permanent link">&para;</a></h3>
+<p>Blocks are confirmed using the voting weight of representatives and these weights are determined by the account balances assigned to those representatives. In addition, the node releases contain a hard-coded set of representative weights captured at the time of the node release to help this process during bootstrapping.</p>
+<p>If looking to use a downloaded ledger there is a risk of it providing inaccurate representative voting weights. Although the potential impacts of this are minimal, below are some recommended steps to take which can help provide additional confidence the ledger can be used.</p>
+<ol>
+<li><strong>Scan the ledger for integrity using the <a href="/commands/command-line-interface/#-debug_validate_blocks"><code>--debug_validate_blocks</code></a> CLI command</strong>. If issues are found they should be inspected carefully and alternative sources of a ledger may need to be considered as failures with this command have a high chance of indicating potentially malicious behavior.</li>
+<li><strong>Review the differences in representative voting weights by running the <a href="/commands/command-line-interface/#-compare_rep_weights"><code>--compare_rep_weights</code></a> CLI command</strong> with the new ledger in the default data folder (old ledger backed up) or in a different data folder by using the optional <code>--data_path</code> argument. This will compare the new ledger voting weights against the hardcoded values in the node (set at the time of release). See the <a href="/commands/command-line-interface/#-compare_rep_weights">CLI command</a> for details on the output with special attention paid to entries in the <code>outliers</code> and <code>newcomers</code> sections. By inspecting those addresses in public explorers such as <a href="https://nanocrawler.cc">Nanocrawler.cc</a>, this can help to determine if voting weight may have been manipulated in the downloaded ledger.</li>
+</ol>
+<p>If you need support with this process or need help in evaluating some of the CLI command results, join the <a href="https://forum.nano.org/c/node-and-rep/8">Node and Representative Management category</a> on the <a href="https://forum.nano.org">Nano Forums</a>.</p>
+<h3 id="confirmation-data">Confirmation data<a class="headerlink" href="#confirmation-data" title="Permanent link">&para;</a></h3>
+<p>Within each account on the ledger a confirmation height is set. This indicates the height of the last block on that chain where quorum was observed on the network. This is set locally by the node and a new ledger file may include this information with it. If the ledger is from a trusted source this confirmation data can be kept, which will save bandwidth and resources on the network by not querying for votes to verify these confirmations.</p>
+<p>If confirmation data for the ledger is not trusted the <a href="/commands/command-line-interface/#-confirmation_height_clear">--confirmation_height_clear</a> CLI can be used to clear these out.</p>
+<hr />
+<h2 id="updating-the-node">Updating the node<a class="headerlink" href="#updating-the-node" title="Permanent link">&para;</a></h2>
+<p>Occasionally, updating to the <a href="/releases/node-releases/#current-release">latest node version</a> requires upgrading the existing ledger which can have the following effects:</p>
+<ul>
+<li>Significant downtime, from a few minutes to several hours, during which the node RPC is not accessible and no voting occurs. The upgrade is especially slower if the ledger is not on an SSD.</li>
+<li>Temporary increased disk space usage - up to 3x the current ledger size in total (e.g. 60GB for a 20GB ledger)</li>
+</ul>
+<p>In order to minimize downtime, consider performing the update in a different machine, and replacing the <a href="#ledger-file">ledger file</a> once complete. Note the following instructions, where <strong>Machine A</strong> has the node and ledger, and <strong>Machine B</strong> will be updating it.</p>
+<ol>
+<li>Create a directory <code>/home/&lt;user&gt;/Nano_Update</code> on Machine B.</li>
+<li>Stop the node on Machine A.</li>
+<li>Copy the <code>data.ldb</code> <a href="#ledger-management">file</a> from Machine A to <code>/home/&lt;user&gt;/Nano_Update/data.ldb</code> on Machine B.</li>
+<li>Start the node again on Machine A.</li>
+<li>Download the <a href="/releases/node-releases/#current-release">latest node version</a>. For the purposes of this guide, using a binary is easier.</li>
+<li>Run the following command (varies based on your operating system): <code>./nano_node --debug_block_count --data_path /home/&lt;user&gt;/Nano_Update --config node.logging.log_to_cerr=true</code></li>
+<li>The message <em>"Upgrade in progress..."</em> will be displayed if a ledger upgrade is required. Wait until the command finishes and <strong>do not stop the upgrade preemptively</strong>.</li>
+<li>Copy <code>/home/&lt;user&gt;/Nano_Update/data.ldb</code> from Machine B to a temporary location on Machine A. <strong>do not overwrite data.ldb on Machine A while the node is running</strong>.</li>
+<li>Stop and <strong>upgrade</strong> to the latest node version on Machine A as you would do normally.</li>
+<li>Stop the node on Machine A in case upgrading restarted it.</li>
+<li>Replace <code>/home/&lt;user&gt;/Nano/data.ldb</code> with the transferred file.</li>
+<li>Restart the node.</li>
+</ol>
+<p>In the event that you are unable to upgrade the ledger on another machine but would still like to minimize downtime, consider <a href="#downloaded-ledger-files">obtaining the ledger from another source</a> as a last resource.</p>
+<hr />
+<h2 id="rocksdb-ledger-backend">RocksDB Ledger Backend<a class="headerlink" href="#rocksdb-ledger-backend" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">RocksDB is experimental, do not use in production</p>
+<p>RocksDB is being included in <em>V20.0</em> as experimental only. Future versions of the node may allow for production use of RocksDB, however old experimental RocksDB ledgers are not guarenteed to be compatible and may require resyncing from scratch.</p>
+<p>If you are testing RocksDB and want to discuss results, configurations, etc. please join the forum topic here: <a href="https://forum.nano.org/t/rocksdb-ledger-backend-testing/111">https://forum.nano.org/t/rocksdb-ledger-backend-testing/111</a></p>
+</div>
+<p>The node ledger currently uses LMDB (Lightning memory-mapped database) by default as the data store. As of <em>v20+</em> the option to use RocksDB becomes available as an experimental option.
+This document will not go into much detail about theses key-value data stores as there is a lot of information available online.
+It is anticipated that bootstrapping will be slower using RocksDB during the initial version at least, but live traffic should be faster due to singluar writes being cached in memory and flushed to disk in bulk.</p>
+<p>Using RocksDB requires a few extra steps as it is an externally required dependency which requires a recent version of RocksDB, so older repositories may not be sufficient, it also requires <code>zlib</code>. If using the docker node, skip to <a href="#enable-rocksdb">Enable RocksDB</a>.</p>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<p><strong>Linux</strong><br />
+Ubuntu 19.04 and later:
+<div class="codehilite"><pre><span></span>sudo apt-get install zlib1g-dev
+sudo apt-get install librocksdb-dev
+</pre></div>
+Otherwise:
+<div class="codehilite"><pre><span></span>sudo apt-get install zlib1g-dev
+export USE_RTTI=1
+git clone https://github.com/facebook/rocksdb.git
+cd rocksdb
+make static_lib
+make install
+</pre></div>
+<strong>MacOS</strong><br />
+<code>brew install rocksdb</code></p>
+<p><strong>Windows</strong><br />
+Recommended way is to use <code>vcpkg</code>:</p>
+<ul>
+<li>add <code>set (VCPKG_LIBRARY_LINKAGE static)</code> to the top of <code>%VCPKG_DIR%\ports\rocksdb\portfile.cmake</code></li>
+<li><code>vcpkg install rocksdb:x64-windows</code></li>
+</ul>
+<p>For other or more detailed instructions visit the official page:
+<a href="https://github.com/facebook/rocksdb/blob/master/INSTALL.md">https://github.com/facebook/rocksdb/blob/master/INSTALL.md</a></p>
+<h3 id="build-node-with-rocksdb-support">Build node with RocksDB support<a class="headerlink" href="#build-node-with-rocksdb-support" title="Permanent link">&para;</a></h3>
+<p>Once RocksDB is installed successfully, the node must be built with RocksDB support using the CMake variable <code>-DNANO_ROCKSDB=ON</code></p>
+<p>The following CMake options can be used to specify where the RocksDB and zlib libraries are if they cannot be found automatically:
+<div class="codehilite"><pre><span></span>ROCKSDB_INCLUDE_DIRS
+ROCKSDB_LIBRARIES
+ZLIB_LIBRARY
+ZLIB_INCLUDE_DIR
+</pre></div></p>
+<h3 id="enable-rocksdb">Enable RocksDB<a class="headerlink" href="#enable-rocksdb" title="Permanent link">&para;</a></h3>
+<p>This can be enabled by adding the following to the <code>config-node.toml</code> file:</p>
+<div class="codehilite"><pre><span></span>[node.rocksdb]
+enable = true
+</pre></div>
+
+<p>There are many other options which can be set. Due to RocksDB generally using more memory the defaults have been made pessimistic in order to run on a wider range of lower end devices. Recommended settings if on a system with 8GB or more RAM (see TOML comments in the generated file for more information on what these do):</p>
+<p><div class="codehilite"><pre><span></span>[node.rocksdb]
+bloom_filter_bits = 10
+block_cache = 1024
+enable_pipelined_write=true
+cache_index_and_filter_blocks=true
+block_size=64
+memtable_size=128
+num_memtables=3
+total_memtable_size=0
+</pre></div>
+Comparision:</p>
+<table>
+<thead>
+<tr>
+<th align="center">LMDB</th>
+<th align="center">RocksDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Tested with the node for many years</td>
+<td align="center">Experimental status</td>
+</tr>
+<tr>
+<td align="center">1 file (data.ldb)</td>
+<td align="center">100+ SST files</td>
+</tr>
+<tr>
+<td align="center">*15GB live ledger size</td>
+<td align="center">Smaller file size (11GB)</td>
+</tr>
+<tr>
+<td align="center">Not many options to configure</td>
+<td align="center">Very configurable</td>
+</tr>
+<tr>
+<td align="center">Unlikely to be further optimized</td>
+<td align="center">Many optimizations possible in future</td>
+</tr>
+<tr>
+<td align="center">Part of the node build process</td>
+<td align="center">Required external dep (incl recent version 5.13+)</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">Less file I/O (writes are flushed in bulk)</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">May use more memory</td>
+</tr>
+</tbody>
+</table>
+<p>* At the time of writing (Oct 2019)</p>
+<p>RocksDB Limitations:</p>
+<ul>
+<li>Automatic backups not currently supported</li>
+<li>Database transaction tracker is not supported</li>
+<li>Cannot execute CLI commands which require writing to the database, such as <code>nano_node --peer_clear</code> these must be executed when the node is stopped</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Snapshotting with RocksDB</p>
+<p>When backing up using the --snapshot CLI option, it is currently set up to do incremental backups, which reduces the need to copy the whole database. However if the original files are deleted, then the backup directory should also be deleted otherwise there can be inconsistencies.</p>
+</div>
                 
                   
                 
@@ -940,8 +1300,8 @@
 
         <!-- Link to previous page -->
         
-          <a href="../ledger-management/"
-              title="Ledger Management"
+          <a href="../troubleshooting/"
+              title="Troubleshooting"
               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
               rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -954,7 +1314,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Ledger Management
+                Troubleshooting
               </span>
             </div>
           </a>
@@ -962,8 +1322,8 @@
 
         <!-- Link to next page -->
         
-          <a href="../../integration-guides/the-basics/"
-              title="The Basics"
+          <a href="../beyond-the-node/"
+              title="Beyond the Node"
               class="md-flex md-footer-nav__link md-footer-nav__link--next"
               rel="next">
             <div class="md-flex__cell md-flex__cell--stretch
@@ -972,7 +1332,7 @@
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                The Basics
+                Beyond the Node
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
